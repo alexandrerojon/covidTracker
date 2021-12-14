@@ -1,10 +1,16 @@
 package io.bigbear.covidTracker.services;
 
+// Custom imports for the Commons CSV reader library
+import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.csv.CSVFormat;
+
+
 
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.io.StringReader;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -24,17 +30,16 @@ public class CoronaVirusDataServices {
                 .build();
         // Return the response as a String that gets stored in local variable
         HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        // Print out resposne from GH repo to ensure we receive data
-        System.out.println(httpResponse.body());
 
-        
-        Iterable<CSVRecord> records = CSVFormat.RFC4180.withFirstRecordAsHeader().parse(in);
+        // Needed to convert the String response to Reader format for the commons method
+        StringReader csvBodyReader = new StringReader(httpResponse.body());
+
+        // Below I have the library from Commons added into my Pom file
+        Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
         for (CSVRecord record : records) {
-            String id = record.get("ID");
-            String customerNo = record.get("CustomerNo");
-            String name = record.get("Name");
+            String state = record.get("Province/State");
+            System.out.println(state);
+
         }
     }
-
-
 }
