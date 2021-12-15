@@ -27,7 +27,9 @@ public class CoronaVirusDataServices {
 
     private List<LocationStats> allStats = new ArrayList<>();
 
-
+    public List<LocationStats> getAllStats() {
+        return allStats;
+    }
 
     @PostConstruct
     @Scheduled(cron = "* * 1 * * *")
