@@ -30,4 +30,12 @@ public class LocationStats {
         this.latestTotalCases = latestTotalCases;
     }
 
+    @Override
+    public String toString() {
+        return "LocationStats{" +
+                "state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", latestTotalCases=" + latestTotalCases +
+                '}';
+    }
 }
