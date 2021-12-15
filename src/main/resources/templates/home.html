@@ -8,6 +8,19 @@
     <h1>Hello, welcome to my COVID-19 tracking app!</h1>
     <p th:text="${testName}"></p>
 
+    <table>
+        <tr>
+            <th>State</th>
+            <th>Country</th>
+            <th>Total Confirmed Cases:</th>
+        </tr>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.state}"> - </td>
+            <td th:text="${locationStat.country}"> - </td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+        </tr>
+    </table>
+
 
 </body>
 </html>
