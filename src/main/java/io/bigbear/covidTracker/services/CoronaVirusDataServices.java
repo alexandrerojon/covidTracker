@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class CoronaVirusDataServices {
 
-    private static String virusDataURL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
+    private static String virusDataURL = "https://disease.sh/v3/covid-19/countries";
 
     private List<LocationStats> allStats = new ArrayList<>();
 
@@ -45,7 +45,6 @@ public class CoronaVirusDataServices {
         // Needed to convert the String response to Reader format for the commons method
         StringReader csvBodyReader = new StringReader(httpResponse.body());
 
-        // Here
 
         // Below I have the library from Commons added into my Pom file
         Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
